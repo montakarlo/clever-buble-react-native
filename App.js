@@ -5,10 +5,10 @@ import DragObject from "./DragObject"
 
 var windowHeight = Dimensions.get('window').height
 var windowWidth = Dimensions.get('window').width;
-const bottomPosition = .04;
+const topPosition = .7;
 const areaRadius = 60;
 const objectRadius = 30;
-const initialLocation = { bottom: 500, left: 100 }
+const initialLocation = { top: 100, left: 100 }
 
 export default function App() {
   //This state variable keeps track of the current color, which should change on magnetize!
@@ -16,20 +16,23 @@ export default function App() {
   const [isInDroppedZone, setIsInDroppedZone] = useState(false);
   const [isMovedOutOfDroppedZone, setIsMovedOutOfDroppedZone] = useState(false);
   const areaCenterX = windowWidth / 2 - objectRadius;
-  const areaCenterY = windowHeight * bottomPosition + areaRadius/2;
+  const areaCenterY = windowHeight * topPosition + areaRadius - 5;
 
   return (
     <DraxProvider>
       <View style={styles.container}>
         <DragObject
           intialLocation={{
-            bottom: isInDroppedZone ? areaCenterY : initialLocation.bottom,
+            top: isInDroppedZone ? areaCenterY : initialLocation.top,
             left: isInDroppedZone ? areaCenterX : initialLocation.left
           }}
           objectRadius={objectRadius}
           isMovedOutOfDroppedZone={isMovedOutOfDroppedZone}
+          isInDroppedZone={isInDroppedZone}
           setIsInDroppedZone={setIsInDroppedZone}
           updateDropColor={updateDropColor}
+          windowHeight={windowHeight}
+          windowWidth={windowWidth}
         />
         <View style={styles.lockContainer}>
           <Text>Drag Here To Magnetize!</Text>
@@ -62,7 +65,7 @@ const styles = StyleSheet.create({
   },
   lockContainer: {
     position: "absolute",
-    bottom: windowHeight * bottomPosition,
+    top: windowHeight * topPosition,
   },
   lockDrop: {
     height: areaRadius*2,
@@ -70,6 +73,6 @@ const styles = StyleSheet.create({
     borderRadius: 60,
     alignSelf: "center",
     borderWidth: 1,
-    marginTop: 5,
+    margin: 5,
   }
 });
