@@ -31,8 +31,6 @@ export default function App() {
           isInDroppedZone={isInDroppedZone}
           setIsInDroppedZone={setIsInDroppedZone}
           updateDropColor={updateDropColor}
-          windowHeight={windowHeight}
-          windowWidth={windowWidth}
         />
         <View style={styles.lockContainer}>
           <Text>Drag Here To Magnetize!</Text>

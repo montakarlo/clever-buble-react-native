@@ -7,7 +7,6 @@ export default function DragObject(props) {
     x: props.intialLocation.left,
     y: props.intialLocation.top
   });
-  const [isMoving, setIsMoving] = useState(false);
   useEffect(() => {
     if (!props.isInDroppedZone) {
       console.log('drop out');
@@ -26,14 +25,11 @@ export default function DragObject(props) {
           width: 2*props.objectRadius,
           height: 2*props.objectRadius,
         }}
-        onDragStart={() => setIsMoving(true)}
         onDragEnd={() => {
           if (props.isMovedOutOfDroppedZone) {
             props.setIsInDroppedZone(false);
             props.updateDropColor('blue');
           }
-
-          setIsMoving(false);
         }}
         onDrag={(data) => {
           setCurrentPosition({
